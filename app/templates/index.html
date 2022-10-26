@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Judul Halaman -->
+	<title>Ewako Empat</title>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Icon -->
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href={{ url_for('static', filename='/css/bootstrap.min.css') }} type="text/css">
+	<link rel="stylesheet" href={{ url_for('static', filename='/css/client_side.css') }}  type="text/css">
+	
+	<!-- JavaScript -->
+	<script src={{ url_for('static', filename='/js/jquery_3.6.0.min.js') }} ></script>
+	<script src={{ url_for('static', filename='/js/bootstrap_3.4.1.min.js') }} ></script>
+</head>
+
+<body id="halamanku" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+	<!-- Navigation Bar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			
+			<!-- Logo -->
+			<div class="navbar-header">
+				<img src={{ url_for('static', filename='/images/logo.png') }} alt="Orbit Logo" 
+				width="50" height="50" align="left">
+				<a class="navbar-brand" href="#halamanku">&#160; Ewako Empat</a>
+			</div>
+			
+			<!-- Daftar Halaman -->
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#informasi">INFORMASI</a></li>
+					<li><a href="#aplikasi">APLIKASI</a></li>
+					<li><a href="#anggotaKelompok">ANGGOTA KELOMPOK</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Bagian Halaman (Informasi) -->
+	<div id="informasi" class="container-fluid">
+		<br>
+		<br>
+		<br>
+		<div class="row">
+			<div class="col-sm-6">
+				<!-- Deskripsi Aplikasi -->
+				<h2>SRP</h2>
+				<h4>Solar Radiation Prediction</h4><br>
+				<p style="text-align: justify;text-justify: inter-word;">
+					Website ini bertujuan untuk memprediksi radiasi pada solar berdasarkan arah angin, kecepatan angin, kelembaban, dan temperature. 
+					Solar radiasi merupakan kekuatan satuan unit area yang diraih dari Matahari dalam bentuk radiasi elektromagnetik pada rangkaian panjang gelombang dari instrument yang terukur. 
+					Data yang dimiliki adalah berdasarkan data meteorological dari stasiun cuaca HI-SEAS. 
+					Data tersebut berawal dari 4 bulan (Bulan Sepember hingga Desember).
+				</p>
+				<br>
+
+				<!-- Tombol Mulai -->
+				<nav id="navgo" class="navbar" style="background-color:#000000;z-index: 0;">
+					<ul class="nav nav-pills">
+						<li class="nav-item">
+							<a class="btn btn-default btn-lg" href="#aplikasi" style="background-color:#d6641d">Mulai</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			
+			<div class="col-sm-6">
+				<br>
+				<br>
+				<!-- Gambar Deskripsi Aplikasi -->
+				<img src={{ url_for('static', filename='/images/sun.JPG') }} width="500" ></img>
+			</div>
+		</div>
+		<br>
+	</div>
+	
+
+	<!-- Bagian Halaman (Aplikasi) -->
+	<div id="aplikasi" data-bs-spy="scroll" data-bs-target="#navgo" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+		<br>
+		<br>
+		<div class="row">
+			<div class="col-sm-6">
+				</br>
+				<!-- Input Nilai Pengukuran dari Pengguna -->
+				<h3 style="margin-left: 50px;">Nilai Pengukuran </h3>
+				<form>
+					<div class="form-group" style="margin-left: 50px;">
+						<!-- Input Slider untuk Nilai Pengukuran Bunga Iris -->
+						<label for="range_Temperature">Temperature (Fahrenheit) </label>&nbsp;&rarr;&nbsp;
+						<span id="rangeVal_Temperature">50<!-- Default value --></span>
+						<input type="range" min="40" max="60" step="0.05" value="50" class="slider" id="range_Temperature" 
+						onInput="$('#rangeVal_Temperature').html($(this).val())">
+						</br>
+						<label for="range_Pressure">Pressure (hg) </label>&nbsp;&rarr;&nbsp;
+						<span id="rangeVal_Pressure">30.6<!-- Default value --></span>
+						<input type="range" min="30.0" max="40.0" step="0.05" value="30.6" class="slider" id="range_Pressure" 
+						onInput="$('#rangeVal_Pressure').html($(this).val())">
+						</br>
+						<label for="range_Humidity">Humidity (percent) </label>&nbsp;&rarr;&nbsp;
+						<span id="rangeVal_Humidity">50<!-- Default value --></span>
+						<input type="range" min="50" max="60" step="0.05" value="50" class="slider" id="range_Humidity" 
+						onInput="$('#rangeVal_Humidity').html($(this).val())">
+						</br>
+						<label for="range_WindDirection">WindDirection(Degrees)</label>&nbsp;&rarr;&nbsp;
+						<span id="rangeVal_WindDirection">176.6<!-- Default value --></span>
+						<input type="range" min="170" max="180" step="0.05" value="176.6" class="slider" id="range_WindDirection" 
+						onInput="$('#rangeVal_WindDirection').html($(this).val())">
+						</br>
+						<label for="range_Speed">Speed (miles per hour) </label>&nbsp;&rarr;&nbsp;
+						<span id="rangeVal_Speed">3.37<!-- Default value --></span>
+						<input type="range" min="1.10" max="15.0" step="0.05" value="3.37" class="slider" id="range_Speed" 
+						onInput="$('#rangeVal_Speed').html($(this).val())">
+						</br>
+						<!-- Tombol Prediksi -->
+						<button type="submit" id="prediksi_submit" class="btn btn-default btn-lg">Prediksi</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-6">
+				<br>
+				<!-- Bagian Halaman untuk Hasil Prediksi -->
+				<div id="hasil_prediksi" align="center">
+						<!-- Hasil Prediksi akan ditampilkan di sini-->
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+	</div>
+
+	<!-- Bagian Halaman (Anggota Kelompok) -->
+	<div id="anggotaKelompok" class="container-fluid text-center">
+		<br>
+		<h2>ANGGOTA KELOMPOK</h2>
+		<h4>Tim Deployment dan Tim DS</h4>
+		<br>
+		<div class="row slideanim">
+			<div class="col-sm-4">
+				<img src={{ url_for('static', filename='/images/firman.png') }} width="80" ></img>
+				<h4>Muhammad Firman Hermawan</h4>
+				<p>Sekolah Tinggi Teknologi Bandung</p>
+			</div>
+			<div class="col-sm-4">
+				<img src={{ url_for('static', filename='/images/pitung.png') }} width="150" ></img>
+				<h4>Adriansyah Pratama Putra</h4>
+				<p>Univeristas Pendidikan Indonesia</p>
+			</div>
+			<div class="col-sm-4">
+				<img src={{ url_for('static', filename='/images/ferdy.png') }} width="150" ></img>
+				<h4>Ferdy wahyudi</h4>
+				<p>STMIK AMIK BANDUNG</p>
+			</div>
+		</div>
+	    <br>
+	    <div class="row slideanim">
+			<div class="col-sm-6">
+				<img src={{ url_for('static', filename='/images/amata.png') }} width="100" ></img>
+				<h4>Amata Kara Perdani Handiman</h4>
+				<p>Univeristas Pendidikan Indonesia</p>
+			</div>
+			<div class="col-sm-6">
+				<img src={{ url_for('static', filename='/images/fanisa.png') }} width="100" ></img>
+				<h4>Fanisa Nimastiti</h4>
+				<p>IT Telkom Purwokerto</p>
+			</div>
+	    </div>
+	</div>
+
+	<!-- Footer -->
+	<footer class="container-fluid text-center">
+		<a href="#halamanku" title="To Top">
+			<span class="glyphicon glyphicon-chevron-up"></span>
+		</a>
+		<p>Orbit Future Academy <br> <a href="https://orbitfutureacademy.id/">orbitfutureacademy.id</a></p>
+	</footer>
+
+	<!-- JavaScript untuk Animasi Scroll dan Prediksi Model -->
+	<script  src={{ url_for('static', filename='/js/client_side.js') }}></script>
+
+</body>
+</html>
